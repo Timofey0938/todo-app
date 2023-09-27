@@ -1,0 +1,43 @@
+<div class="todo">
+  <input
+    type="checkbox"
+    [checked]="todo.completed"
+    (click)="handleTodoComplete(todo.id)"
+  >
+
+  <div *ngIf="!editing" class="content">
+    <p
+      class="text"
+      [class]="{'completed': todo.completed}"
+      (click)="handleTodoComplete(todo.id)"
+    >
+      {{ todo.text }}
+    </p>
+    <div>
+      <button (click)="edit()">
+        <img src="/assets/icons/edit.png" class="icon" alt="edit">
+      </button>
+      <button class="removeButton" (click)="removeTodo(todo.id)">
+        <img src="/assets/icons/remove.png" class="icon" alt="remove">
+      </button>
+    </div>
+  </div>
+  
+  <div *ngIf="editing" class="content">
+    <form [formGroup]="form" (ngSubmit)="save()">
+      <input
+        type="text"
+        formControlName="todoText"
+        autofocus="true"
+      >
+    </form>
+    <div>
+      <button (click)="save()">
+        <img src="/assets/icons/save.png" class="icon" alt="save">
+      </button>
+      <button class="removeButton" (click)="cancel()">
+        <img src="/assets/icons/remove.png" class="icon" alt="cancel">
+      </button>
+    </div>
+  </div>
+</div>
